@@ -1,11 +1,4 @@
-// Sample hardware configuration file
-
-// To use:
-// - Copy it to the current project directory.
-// - Delete the following line:
-#error Don't use sample config directly
-// - Change pin values according to your setup.
-
+// hardware configuration file
 
 #pragma once
 
@@ -18,14 +11,7 @@
 #define MOTOR_L_FWD_PIN  7
 #define MOTOR_L_REV_PIN  8
 
-#define SERVO_PIN 9
-
 /* SENSORS */
-#define SONIC_TRIG_PIN 10
-#define SONIC_ECHO_PIN 3
-
-#define ENCODER_R_PIN // FILL IN
-#define ENCODER_L_PIN // FILL IN
 
 #define IR_R_PIN // FILL IN 
 #define IR_L_PIN // FILL IN 
