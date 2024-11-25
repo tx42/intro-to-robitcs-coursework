@@ -1,15 +1,15 @@
 #include "ultrasonic.h"
 
-Ultrasonic::Ultrasonic(pin trigger_pin, pin echo_pin){
+Ultrasonic::init(int trigger_pin, int echo_pin){
    m_TRIGGER_PIN = trigger_pin;
    m_ECHO_PIN = echo_pin;
 
    // pin init
    pinMode(m_TRIGGER_PIN, OUTPUT);
-   pinMode(m_ECHO_PIN, OUTPUT);
+   pinMode(m_ECHO_PIN, INPUT);
 }
 
-void pingSensor(pin trigger_pin){
+void pingSensor(int trigger_pin){
   digitalWrite(trigger_pin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigger_pin, HIGH);
@@ -27,7 +27,7 @@ float Ultrasonic::measure(){
    pingSensor(m_TRIGGER_PIN);
    long duration = pulseIn(m_ECHO_PIN, HIGH);
 
-   float distance = tofToDistance
+   float distance = tofToDistance;
 }
 
 

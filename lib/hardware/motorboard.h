@@ -4,7 +4,6 @@
  * operations.
  */
 #pragma once
-#include "auxtypes.h"
 
 enum MotorMode{
    MOTOR_FORWARD,
@@ -12,31 +11,35 @@ enum MotorMode{
    MOTOR_CRUISE
 };
 
-struct MotorboardConfig{
-   pin r_pwr;
-   pin l_pwr;
-
-   pin r_fwd;
-   pin r_rev;
-   pin_l_fwd;
-   pin_l_rev;
-};
-
 class Motorboard{
-   private:
+private:
    // pin declarations
-   pin m_L_POWER_PIN;
-   pin m_R_POWER_PIN;
+   int m_L_POWER_PIN;
+   int m_R_POWER_PIN;
 
-   pin m_L_FWD_PIN;
-   pin m_L_REV_PIN;
-   pin m_R_FWD_PIN;
-   pin m_R_REV_PIN;
+   int m_L_FWD_PIN;
+   int m_L_REV_PIN;
+   int m_R_FWD_PIN;
+   int m_R_REV_PIN;
 
-   int m_turn_vel;
-   int m_fwd_vel;
-   public:
-   Motorboard(MotorboardConfig config);
+   // int m_turn_vel;
+   // int m_fwd_vel;
+public:
+   MotorMode l_motor_mode;
+   MotorMode r_motor_mode;
+
+   int l_power;
+   int r_power;
+
+   Motorboard();
+
+   void init(int r_pwr,
+               int l_pwr,
+
+               int r_fwd,
+               int r_rev,
+               int l_fwd,
+               int l_rev);
 
    // high-level motorboard control
    void forward(int power);
@@ -54,4 +57,3 @@ class Motorboard{
    void setLeftMotor(int power, MotorMode mode);
    void setRightMotor(int power, MotorMode mode);
 };
-

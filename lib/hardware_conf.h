@@ -2,8 +2,6 @@
 
 // To use:
 // - Copy it to the current project directory.
-// - Delete the following line:
-#error "Don't use sample config directly"
 // - Change pin values according to your setup.
 
 #pragma once
