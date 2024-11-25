@@ -13,15 +13,26 @@
 
 /* SENSORS */
 
-#define IR_R_PIN // FILL IN 
-#define IR_L_PIN // FILL IN 
+#define ENCODER_R_PIN 4 // FILL IN
+#define ENCODER_L_PIN 5 // FILL IN
 
-#define LINE_SENSOR_0_PIN A0
-#define LINE_SENSOR_1_PIN A1
-#define LINE_SENSOR_2_PIN A2
-#define LINE_SENSOR_3_PIN A3
-#define LINE_SENSOR_4_PIN A4
+// #define IR_R_PIN // FILL IN 
+// #define IR_L_PIN // FILL IN 
+
+// #define LINE_SENSOR_0_PIN A0
+// #define LINE_SENSOR_1_PIN A1
+// #define LINE_SENSOR_2_PIN A2
+// #define LINE_SENSOR_3_PIN A3
+// #define LINE_SENSOR_4_PIN A4
 
 /* PERIPHERALS */
 #define BEEPER_PIN 13
+
+
+/* MEASUREMENTS AND PARAMETERS */
+
+// TODO: measure
+#define WHEEL_RADIUS 5
+#define LR_WHEEL_DIST 10
+#define ENCODER_SLIT_NUM 20
 
