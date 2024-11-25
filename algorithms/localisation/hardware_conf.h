@@ -11,7 +11,11 @@
 #define MOTOR_L_FWD_PIN  7
 #define MOTOR_L_REV_PIN  8
 
+// #define SERVO_PIN 9
+
 /* SENSORS */
+// #define SONIC_TRIG_PIN 10
+// #define SONIC_ECHO_PIN 3
 
 #define ENCODER_R_PIN 4 // FILL IN
 #define ENCODER_L_PIN 5 // FILL IN
@@ -28,11 +32,9 @@
 /* PERIPHERALS */
 #define BEEPER_PIN 13
 
-
 /* MEASUREMENTS AND PARAMETERS */
 
 // TODO: measure
 #define WHEEL_RADIUS 5
 #define LR_WHEEL_DIST 10
 #define ENCODER_SLIT_NUM 20
-

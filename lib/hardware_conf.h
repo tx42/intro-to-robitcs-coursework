@@ -36,3 +36,9 @@
 /* PERIPHERALS */
 #define BEEPER_PIN 13
 
+/* MEASUREMENTS AND PARAMETERS */
+
+// TODO: measure
+#define WHEEL_RADIUS 5
+#define LR_WHEEL_DIST 10
+#define ENCODER_SLIT_NUM 20
