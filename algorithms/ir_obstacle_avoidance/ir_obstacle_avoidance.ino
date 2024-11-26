@@ -3,14 +3,14 @@
 #include "hardware_conf.h"
 
 
-#define SPEED 200                      
-#define MILESTONE_LENGTH 20            
-#define OBSTACLE_DISTANCE_THRESHOLD 15 
+// #define SPEED                      
+// #define MILESTONE_LENGTH            
+// #define OBSTACLE_DISTANCE_THRESHOLD  
 
 Motorboard motorboard;
 Localisation loc;
 
-int milestone = 0;
+// int milestone = ;
 
 void setup() {
     motorboard.init(
