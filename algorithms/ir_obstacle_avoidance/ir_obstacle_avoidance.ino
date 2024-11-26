@@ -2,9 +2,9 @@
 #include "localisation.h"
 #include "hardware_conf.h"
 
-// #define SPEED                    
-// #define MILESTONE_LENGTH            
-// #define OBSTACLE_DISTANCE_THRESHOLD 
+#define SPEED 255                    
+#define MILESTONE_LENGTH 10          
+#define OBSTACLE_DISTANCE_THRESHOLD 10
 
 Motorboard motorboard;
 Localisation loc;
