@@ -2,15 +2,16 @@
 #include "localisation.h"
 #include "hardware_conf.h"
 
-
-// #define SPEED                      
+// #define SPEED                    
 // #define MILESTONE_LENGTH            
-// #define OBSTACLE_DISTANCE_THRESHOLD  
+// #define OBSTACLE_DISTANCE_THRESHOLD 
 
 Motorboard motorboard;
 Localisation loc;
 
-// int milestone = ;
+int milestone = 0 ;
+unsigned long lastTurnTime = 0;
+bool avoidingObstacle = false;
 
 void setup() {
     motorboard.init(
@@ -36,18 +37,24 @@ void setup() {
 }
 
 void loop() {
-    int isObstacle = digitalRead(isObstaclePin); 
+    int isObstacle = digitalRead(isObstaclePin);
 
-    if (isObstacle == LOW) { 
+    if (isObstacle == LOW && !avoidingObstacle) {
         Serial.println("OBSTACLE DETECTED!");
-        motorboard.stop();       
-        delay(1000);             
+        motorboard.stop();
+        avoidingObstacle = true;
+        lastTurnTime = millis();
+    }
 
-        /// Performing obstacle avoidance
-        Serial.println("Turning to avoid obstacle...");
-        motorboard.right(SPEED);
-        delay(1000);            
-        motorboard.forward(SPEED);
+    if (avoidingObstacle) {
+        unsigned long currentTime = millis();
+        if (currentTime - lastTurnTime < 1000) {
+            Serial.println("Turning to avoid obstacle...");
+            motorboard.right(SPEED);
+        } else {
+            motorboard.forward(SPEED);
+            avoidingObstacle = false; 
+        }
     } else {
         if (milestone * MILESTONE_LENGTH < loc.y) {
             Serial.print("Milestone reached at distance: ");
@@ -64,3 +71,7 @@ void loop() {
 
     delay(100); 
 }
+
+// can i use diffrent speeds when turning or find a way to get a specfic angle, could help. 
+// find a way to get it to move back in the same directoon it was walking, so it can turn and avoiding checking angles or having to.
+// 
