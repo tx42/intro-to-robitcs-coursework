@@ -1,6 +1,7 @@
 #include "ultrasonic.h"
+#include <Arduino.h>
 
-Ultrasonic::init(int trigger_pin, int echo_pin){
+void Ultrasonic::init(int trigger_pin, int echo_pin){
    m_TRIGGER_PIN = trigger_pin;
    m_ECHO_PIN = echo_pin;
 
@@ -27,7 +28,5 @@ float Ultrasonic::measure(){
    pingSensor(m_TRIGGER_PIN);
    long duration = pulseIn(m_ECHO_PIN, HIGH);
 
-   float distance = tofToDistance;
+   float distance = tofToDistance(duration);
 }
-
-

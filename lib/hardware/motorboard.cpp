@@ -54,32 +54,31 @@ void Motorboard::setRightMotor(int power, MotorMode mode){
 }
 
 void Motorboard::forward(int power){
-   set_right_motor(power, MOTOR_FORWARD);
-   set_left_motor(power, MOTOR_FORWARD);
+   setRightMotor(power, MOTOR_FORWARD);
+   setLeftMotor(power, MOTOR_FORWARD);
 }
 
 void Motorboard::right(int power){
-   set_right_motor(power, MOTOR_REVERSE);
-   set_left_motor(power, MOTOR_FORWARD);
+   setRightMotor(power, MOTOR_REVERSE);
+   setLeftMotor(power, MOTOR_FORWARD);
 }
 
 void Motorboard::left(int power){
-   set_right_motor(power, MOTOR_FORWARD);
-   set_left_motor(power, MOTOR_REVERSE);
+   setRightMotor(power, MOTOR_FORWARD);
+   setLeftMotor(power, MOTOR_REVERSE);
 }
 
 void Motorboard::back(int power){
-   set_right_motor(power, MOTOR_REVERSE);
-   set_left_motor(power, MOTOR_REVERSE);
+   setRightMotor(power, MOTOR_REVERSE);
+   setLeftMotor(power, MOTOR_REVERSE);
 }
 
 void Motorboard::stop(){
-   set_right_motor(0, MOTOR_FORWARD);
-   set_left_motor(0, MOTOR_FORWARD);
+   setRightMotor(0, MOTOR_FORWARD);
+   setLeftMotor(0, MOTOR_FORWARD);
 }
 
 void Motorboard::cruise(){
-   set_right_motor(0, MOTOR_CRUISE);
-   set_left_motor(0, MOTOR_CRUISE);
+   setRightMotor(0, MOTOR_CRUISE);
+   setLeftMotor(0, MOTOR_CRUISE);
 }
-

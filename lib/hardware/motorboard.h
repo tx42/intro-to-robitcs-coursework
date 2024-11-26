@@ -4,6 +4,7 @@
  * operations.
  */
 #pragma once
+#include <Arduino.h>
 
 enum MotorMode{
    MOTOR_FORWARD,
@@ -31,7 +32,7 @@ public:
    int l_power;
    int r_power;
 
-   Motorboard();
+   Motorboard(){};
 
    void init(int r_pwr,
                int l_pwr,
