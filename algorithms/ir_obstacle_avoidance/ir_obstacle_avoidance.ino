@@ -7,4 +7,16 @@ void setup(){
 
 void loop(){
    // write code that loops here
+   isObstacle = digitalRead(isObstaclePin);
+  if (isObstacle == LOW)
+  {
+    Serial.println("OBSTACLE!!, OBSTACLE!!");
+    digitalWrite(LED, HIGH);
+  }
+  else
+  {
+    Serial.println("clear");
+    digitalWrite(LED, LOW);
+  }
+  delay(200);
 }
