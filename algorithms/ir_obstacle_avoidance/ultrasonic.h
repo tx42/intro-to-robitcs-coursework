@@ -5,6 +5,7 @@
  * ability to poll data and return distance
  */
 #pragma once
+#include <Arduino.h>
 
 // speed of sound in meters per second
 #define SPEED_OF_SOUND 343.0
@@ -12,12 +13,13 @@
 class Ultrasonic{
 private:
    // pin defenitions
-   int m_TRGGER_PIN;
+   int m_TRIGGER_PIN;
    int m_ECHO_PIN;
 
 public:
-   Ultrasonic();
+   Ultrasonic(){};
    void init(int trigger_pin, int echo_pin);
 
    float measure();
 };
+
