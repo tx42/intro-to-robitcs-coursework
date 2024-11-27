@@ -23,7 +23,7 @@ float WallFollower::getFollowDirectionCoefficient(){
 void WallFollower::setupFollowing(){
     if(m_status != STOPPED) return; // shouldn't normally happen
 
-    m_servo->write(sensor_degree * getFollowDirectionCoefficient());
+    m_servo->write(-sensor_degree * getFollowDirectionCoefficient() + 90);
     m_status = SETTING_UP;
     m_setup_finish_time = millis() + SERVO_SETUP_DELAY;
 }

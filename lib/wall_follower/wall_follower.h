@@ -39,9 +39,9 @@ private:
     void checkSetupTimer();
     float getFollowDirectionCoefficient();
 public:
-    float sensor_degree = 45.0;
+    int sensor_degree = 45; // degrees shift from center
     float turn_coefficient = 0.5;
-    float target_distance = 10.0; // in cm
+    float target_distance = 20.0; // in cm
     float follow_vel = 100.0;
 
     WallFollower(){};

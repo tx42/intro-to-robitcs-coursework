@@ -20,6 +20,7 @@ public:
    Ultrasonic(){};
    void init(int trigger_pin, int echo_pin);
 
+   // returns distance in cm
    float measure();
 };
 
