@@ -8,7 +8,7 @@
 
 class Localisation{
 private:
-    Motorboard& m_motorboard;
+    Motorboard* m_motorboard;
 
     int L_ENCODER_PIN;
     int R_ENCODER_PIN;
@@ -36,7 +36,7 @@ public:
 
     // all distances in cm
     Localisation(){};
-    void init(Motorboard& motorboard, int r_encoder_pin, int l_encoder_pin,
+    void init(Motorboard* motorboard, int r_encoder_pin, int l_encoder_pin,
                     float wheel_radius, float lr_wheel_dist, int num_slits);
 
     // checks data from encoders

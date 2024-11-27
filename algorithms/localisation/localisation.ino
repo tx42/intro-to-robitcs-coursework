@@ -16,7 +16,7 @@ void setup(){
    );
 
    loc.init(
-      motorboard,
+      &motorboard,
       ENCODER_R_PIN,
       ENCODER_L_PIN,
       WHEEL_RADIUS,

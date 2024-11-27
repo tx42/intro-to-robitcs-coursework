@@ -1,6 +1,6 @@
 #include "localisation.h"
 
-void Localisation::init(Motorboard& motorboard, int r_encoder_pin, int l_encoder_pin,
+void Localisation::init(Motorboard* motorboard, int r_encoder_pin, int l_encoder_pin,
                             float wheel_radius, float lr_wheel_dist, int num_slits){
     m_motorboard = motorboard;
 
@@ -48,7 +48,7 @@ float Localisation::encDistToRealDist(int enc_dist){
 
 void Localisation::tickLeft(){
     bool measure = digitalRead(L_ENCODER_PIN);
-    int enc_dist = singedEncoderDistance(m_last_enc_state_l, measure, m_motorboard.l_motor_mode);
+    int enc_dist = singedEncoderDistance(m_last_enc_state_l, measure, m_motorboard->l_motor_mode);
     m_last_enc_state_l = measure;
 
     // convert enc_dist to real distance
@@ -68,7 +68,7 @@ void Localisation::tickLeft(){
 
 void Localisation::tickRight(){
     bool measure = digitalRead(R_ENCODER_PIN);
-    int enc_dist = singedEncoderDistance(m_last_enc_state_r, measure, m_motorboard.r_motor_mode);
+    int enc_dist = singedEncoderDistance(m_last_enc_state_r, measure, m_motorboard->r_motor_mode);
     m_last_enc_state_r = measure;
 
     // convert enc_dist to real distance

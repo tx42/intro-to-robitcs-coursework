@@ -29,7 +29,7 @@ void setup(){
     ultrasonic.init(SONIC_TRIG_PIN, SONIC_ECHO_PIN);
 
     // setup wall follower
-    follower.init(motorboard, ultrasonic, sonic_dir_servo);
+    follower.init(&motorboard, &ultrasonic, &sonic_dir_servo);
 
     // startup delay
     delay(5000);
