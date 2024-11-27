@@ -1,0 +1,164 @@
+:root{
+    --gray: #ddd;
+}
+
+body{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hidden{
+    display: none !important;
+}
+
+#connection-screen{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#connection-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.debugger-grid{
+    position: absolute;
+    height: calc(100% - 30px);
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-template-rows: repeat(3, 33vh);
+}
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    
+    padding-left: 10px;
+    line-height: 30px;
+    
+    background-color: var(--gray);
+    border-top: black 1px solid;
+}
+
+.frame.plot{
+    grid-column: 1 / 3;
+    grid-row: 1 / 4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plot-container{
+    position: relative;
+}
+
+#object-overlay{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+#object-prefab{
+    display: none;
+}
+
+.object-icon{
+    position: absolute;
+}
+
+canvas{
+    border: 1px solid black;
+}
+
+.frame{
+    padding: 5px;
+}
+
+.frame.terminal{
+    grid-column: 3;
+    grid-row: 1 / 3;
+
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: stretch;
+    align-items: stretch;
+
+    gap:5px;
+}
+
+.frame.sensors{
+    grid-column: 3;
+    grid-row: 3;
+
+    overflow-y: scroll;
+    position: relative;
+}
+
+.frame.sensors:has(tbody:empty)::after{
+    content: '';
+    position: absolute;
+    
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--gray);
+    opacity: 0.8;
+}
+
+#text-output-container{
+    flex: 1;
+    overflow-y: scroll;
+    background-color: white;
+
+    border: black 1px solid;
+
+    padding: 5px;
+}
+
+#terminal-input-form{
+    padding-bottom: 5px;
+    display: flex;
+
+    justify-content: stretch;
+    gap: 5px;
+}
+
+#text-input{
+    flex: 1;
+}
+
+#sensors-table{
+    width: 100%;
+}
+
+#sensors-table tr{
+    text-align: left;
+
+    border-bottom: 1px solid black;
+}
+
+#sensors-table tbody th{
+    font-weight: normal;
+}
