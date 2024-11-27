@@ -16,15 +16,22 @@ private:
     bool m_last_enc_state_l;
     bool m_last_enc_state_r;
 
+    int m_l_enc_dist;
+    int m_r_enc_dist;
+
+    // constants
     float m_wheel_radius;
-    float m_lr_wheel_dist;
+    float m_wheel_distance;
     int m_num_slits;
 
     float encDistToRealDist(int enc_dist);
 
-    void tickLeft();
-    void tickRight();
+    void sample();
+    void update();
+
+    unsigned long m_last_update_time;
 public:
+    int update_rate = 50; // in ms
     // current x, y position and orientation
     // x, y is a righthanded coordinate system
     // at angle 0, y is forward direction
@@ -37,7 +44,7 @@ public:
     // all distances in cm
     Localisation(){};
     void init(Motorboard* motorboard, int r_encoder_pin, int l_encoder_pin,
-                    float wheel_radius, float lr_wheel_dist, int num_slits);
+                    float wheel_radius, float wheel_dist, int num_slits);
 
     // checks data from encoders
     // and updates position

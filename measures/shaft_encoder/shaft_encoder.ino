@@ -5,11 +5,19 @@ void setup(){
   Serial.begin(9600);
 }
 
-void loop(){
-  int enc1 = analogRead(ENC1);
-  int enc2 = analogRead(ENC2);
+int counter = 0;
 
-  Serial.print(enc1);
-  Serial.print(" ");
-  Serial.println(enc2);
+bool last_value;
+
+void loop(){
+  bool value = analogRead(ENC1) > 40;
+
+  if(value){
+    if(value != last_value){
+      counter++; 
+      Serial.println(counter);
+    }
+  }
+
+  last_value = value;
 }
