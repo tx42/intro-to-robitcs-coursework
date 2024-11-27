@@ -40,4 +40,4 @@
 
 #define WHEEL_RADIUS 65
 #define LR_WHEEL_DIST 143
-#define ENCODER_SLIT_NUM 23
+#define ENCODER_SLIT_NUM 20
