@@ -1,10 +1,5 @@
 #include "wall_follower.h"
 
-const float dir_degree = 45.0;
-const float turn_coefficient = 0.5;
-const float target_dist = 10.0; // in cm
-const float follow_vel = 100.0;
-
 void WallFollower::init(Motorboard* motorboard, Ultrasonic* ultrasonic, Servo* dir_servo){
     m_motorboard = motorboard;
     m_ultrasonic = ultrasonic;
@@ -12,13 +7,23 @@ void WallFollower::init(Motorboard* motorboard, Ultrasonic* ultrasonic, Servo* d
 }
 
 void WallFollower::setFollowDirection(FollowDirection direction){
+    if(getStatus() != STOPPED) return;
+
     m_follow_dir = direction;
+}
+
+float WallFollower::getFollowDirectionCoefficient(){
+    if(m_follow_dir == CW){
+        return 1.0;
+    }else{
+        return -1.0;
+    }
 }
 
 void WallFollower::setupFollowing(){
     if(m_status != STOPPED) return; // shouldn't normally happen
 
-    m_servo->write(dir_degree);
+    m_servo->write(sensor_degree * getFollowDirectionCoefficient());
     m_status = SETTING_UP;
     m_setup_finish_time = millis() + SERVO_SETUP_DELAY;
 }
@@ -48,7 +53,8 @@ void WallFollower::followTick(){
     // get distance measurement
     float dist = m_ultrasonic->measure();
     // calculate turn
-    float turn = turn_coefficient * (target_dist - dist);
+    float turn = turn_coefficient * (target_distance - dist);
+    turn *= getFollowDirectionCoefficient();
     // apply turn and velocity
     m_motorboard->setVelocityTurn(follow_vel, turn);
 }

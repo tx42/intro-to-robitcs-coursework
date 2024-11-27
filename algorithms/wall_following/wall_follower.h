@@ -33,16 +33,23 @@ private:
     FollowStatus m_status = STOPPED;
 
     unsigned long m_setup_finish_time;
+
     // Calculates and updates motor velocities
     void followTick();
-
     void checkSetupTimer();
+    float getFollowDirectionCoefficient();
 public:
+    float sensor_degree = 45.0;
+    float turn_coefficient = 0.5;
+    float target_distance = 10.0; // in cm
+    float follow_vel = 100.0;
+
     WallFollower(){};
     void init(Motorboard* motorboard, Ultrasonic* ultrasonic, Servo* dir_servo);
 
     // Sets which way wall will be traversed:
-    // either clockwise or counter-clockwise
+    // either clockwise or counter-clockwise.
+    // Will ignore if follower is not in STOPPED state
     void setFollowDirection(FollowDirection direction);
 
     // Asyncronisly sets up everything needed
