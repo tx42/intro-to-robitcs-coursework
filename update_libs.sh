@@ -7,7 +7,7 @@ then
     exit 1
 fi
 # get a list of all current libs
-for lib in `find lib -name '*.h' -or -name '*.cpp' -maxdepth 2`
+for lib in `find lib -depth 2 -name '*.h' -or -name '*.cpp'`
 do
     # check if dependencies exsist
     for instance in `find $1 -name '*.h' -or -name '*.cpp'`

@@ -17,8 +17,9 @@ private:
    int m_ECHO_PIN;
 
 public:
-  Ultrasonic(){};
+   Ultrasonic(){};
    void init(int trigger_pin, int echo_pin);
 
    float measure();
 };
+
