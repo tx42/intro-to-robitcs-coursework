@@ -11,7 +11,7 @@ void WallFollower::init(Motorboard& motorboard, Ultrasonic& ultrasonic, Servo& d
     m_servo = dir_servo;
 }
 
-void setFollowDirection(FollowDirection direction){
+void WallFollower::setFollowDirection(FollowDirection direction){
     m_follow_dir = direction;
 }
 

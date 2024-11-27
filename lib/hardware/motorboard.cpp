@@ -53,6 +53,22 @@ void Motorboard::setRightMotor(int power, MotorMode mode){
    digitalWrite(m_R_REV_PIN, mode == MOTOR_REVERSE);
 }
 
+void Motorboard::setSignedLeftMotor(int power){
+   if(power < 0){
+      setLeftMotor(-power, MOTOR_REVERSE);
+   }else{
+      setLeftMotor(power, MOTOR_FORWARD);
+   }
+}
+
+void Motorboard::setSignedRightMotor(int power){
+   if(power < 0){
+      setRightMotor(-power, MOTOR_REVERSE);
+   }else{
+      setRightMotor(power, MOTOR_FORWARD);
+   }
+}
+
 void Motorboard::forward(int power){
    setRightMotor(power, MOTOR_FORWARD);
    setLeftMotor(power, MOTOR_FORWARD);
@@ -81,4 +97,24 @@ void Motorboard::stop(){
 void Motorboard::cruise(){
    setRightMotor(0, MOTOR_CRUISE);
    setLeftMotor(0, MOTOR_CRUISE);
+}
+
+void Motorboard::setVelocityTurn(float vel, float turn){
+   float v_r = vel + turn;
+   float v_l = vel - turn;
+
+   // normalise if overflow
+   float v_top = max(v_r, v_l);
+   if(v_top > 100.0){
+      float norm_factor = 100.0 / v_top;
+      v_r = v_r * norm_factor;
+      v_l = v_l * norm_factor;
+   }
+   
+   // convert to 0 - 255
+   int power_r = round(v_r * 255);
+   int power_l = round(v_l * 255);
+
+   setSignedRightMotor(power_r);
+   setSignedLeftMotor(power_l);
 }

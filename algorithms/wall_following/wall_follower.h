@@ -38,7 +38,7 @@ private:
 
     void checkSetupTimer();
 public:
-    WallFollower();
+    WallFollower(){};
     void init(Motorboard& motorboard, Ultrasonic& ultrasonic, Servo& dir_servo);
 
     // Sets which way wall will be traversed:

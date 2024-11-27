@@ -1,5 +1,4 @@
 #include "ultrasonic.h"
-#include <Arduino.h>
 
 void Ultrasonic::init(int trigger_pin, int echo_pin){
    m_TRIGGER_PIN = trigger_pin;

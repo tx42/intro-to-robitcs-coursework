@@ -22,9 +22,6 @@ private:
    int m_L_REV_PIN;
    int m_R_FWD_PIN;
    int m_R_REV_PIN;
-
-   // int m_turn_vel;
-   // int m_fwd_vel;
 public:
    MotorMode l_motor_mode;
    MotorMode r_motor_mode;
@@ -50,9 +47,15 @@ public:
    void cruise();
    void stop();
 
-   // TODO: velocity-turn control
-   // void setCwTurn(int turn_velocity);
-   // void setForwardVelocity(int forward_velocity);
+   // velocity turn control
+   // values for vel and turn are floats from -100 to 100
+   // if supplied values are greater or passed in a combination,
+   // input will be normalised.
+   // positive turn is counter-clockwise
+   void setVelocityTurn(float vel, float turn);
+
+   void setSignedLeftMotor(int power);
+   void setSignedRightMotor(int power);
 
    // low-level functionality
    void setLeftMotor(int power, MotorMode mode);
