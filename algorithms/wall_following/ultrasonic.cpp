@@ -1,5 +1,8 @@
 #include "ultrasonic.h"
 
+// max distance detectable by ultrasonic (in cm)
+#define MAX_DISTANCE 100
+
 void Ultrasonic::init(int trigger_pin, int echo_pin){
    m_TRIGGER_PIN = trigger_pin;
    m_ECHO_PIN = echo_pin;
@@ -25,7 +28,10 @@ float tofToDistance(long tof){
 
 float Ultrasonic::measure(){
    pingSensor(m_TRIGGER_PIN);
-   long duration = pulseIn(m_ECHO_PIN, HIGH);
+   long duration = pulseIn(m_ECHO_PIN, HIGH, MAX_DISTANCE * 30);
+   if(duration == 0){
+      return MAX_DISTANCE;
+   }
 
    float distance = tofToDistance(duration);
 }

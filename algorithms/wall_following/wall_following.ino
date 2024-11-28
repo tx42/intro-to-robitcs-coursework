@@ -34,15 +34,9 @@ void setup(){
     // startup delay
     delay(5000);
 
-    follower.blockingSetupAndStart();
+    follower.start();
 }
 
 void loop(){
     follower.tick();
-
-    if(follower.getStatus() == LOST){
-        follower.stopFollowing();
-        delay(5000);
-        follower.blockingSetupAndStart();
-    }
 }
