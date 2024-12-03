@@ -19,7 +19,7 @@
 
 /* SENSORS */
 #define SONIC_TRIG_PIN 10
-#define SONIC_ECHO_PIN 3
+#define SONIC_ECHO_PIN 2
 
 // #define ENCODER_R_PIN // FILL IN
 // #define ENCODER_L_PIN // FILL IN

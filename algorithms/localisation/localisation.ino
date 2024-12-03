@@ -24,19 +24,19 @@ void setup(){
       ENCODER_SLIT_NUM
    );
 
+   loc.update_rate = 100;
    Serial.begin(9600);
 }
 
-#define SPEED 150
-#define MILESTONE_LENGTH 100
+#define SPEED 250
 int milestone = 0;
 
 void loop(){
-   // simple code
-   // robot will go in one direction stopping every 
-   // 10 centimeters
-   motorboard.forward(SPEED);
-
+    // simple code
+    // robot will go in one direction stopping every 
+    // 10 centimeters
+    motorboard.forward(SPEED);
+    
     Serial.print(loc.x);
     Serial.print('\t');
     Serial.print(loc.y);
@@ -44,13 +44,17 @@ void loop(){
     Serial.print(loc.angle);
     Serial.print('\n');
 
-   // remai`neder of y
-   if(milestone * MILESTONE_LENGTH < loc.y){
-      // stop & wait
+    if(loc.y > milestone*1000){
       motorboard.stop();
       milestone++;
       delay(2000);
-   }
-
+    }
+//   if(milestone * 1000 < loc.y){
+//      // stop & wait
+//      motorboard.stop();
+//      milestone++;
+//      delay(2000);
+//   }
+  
    loc.tick();
 }

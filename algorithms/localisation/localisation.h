@@ -24,6 +24,8 @@ private:
     float m_wheel_distance;
     int m_num_slits;
 
+    // accepts number of encoder ticks (encoder distance)
+    // returns distance travelled by the wheel (in mm)
     float encDistToRealDist(int enc_dist);
 
     void sample();
@@ -35,13 +37,13 @@ public:
     // current x, y position and orientation
     // x, y is a righthanded coordinate system
     // at angle 0, y is forward direction
-    // x, y are measured in cm
+    // x, y are measured in mm
     // angle is measured in radians
     float x;
     float y;
     float angle;
 
-    // all distances in cm
+    // all distances in mm
     Localisation(){};
     void init(Motorboard* motorboard, int r_encoder_pin, int l_encoder_pin,
                     float wheel_radius, float wheel_dist, int num_slits);

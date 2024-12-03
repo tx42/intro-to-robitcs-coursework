@@ -43,7 +43,7 @@ void WallFollower::tick(){
     m_motorboard->setVelocityTurn(follow_vel, turn);
 }
 
-void WallFollower::stopFollowing(){
+void WallFollower::stop(){
     m_motorboard->stop();
 
     m_status = STOPPED;

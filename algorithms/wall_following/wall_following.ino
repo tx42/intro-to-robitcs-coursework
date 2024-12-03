@@ -31,6 +31,8 @@ void setup(){
     // setup wall follower
     follower.init(&motorboard, &ultrasonic, &sonic_dir_servo);
 
+    Serial.begin(9600);
+    Serial.println("Starting in 5 sec");
     // startup delay
     delay(5000);
 
@@ -38,5 +40,8 @@ void setup(){
 }
 
 void loop(){
-    follower.tick();
+    Serial.print("measure: ");
+    Serial.println(ultrasonic.measure());
+  
+//    follower.tick();
 }

@@ -19,6 +19,10 @@ void Localisation::init(Motorboard* motorboard, int r_encoder_pin, int l_encoder
     x = 0.0;
     y = 0.0;
     angle = 0.0;
+
+    // first measurement
+    m_last_enc_state_l = digitalRead(L_ENCODER_PIN);
+    m_last_enc_state_r = digitalRead(R_ENCODER_PIN);
 }
 
 int singedEncoderDistance(bool last_measure, bool current_measure, MotorMode motor_mode){
@@ -42,9 +46,12 @@ int singedEncoderDistance(bool last_measure, bool current_measure, MotorMode mot
 
 float Localisation::encDistToRealDist(int enc_dist){
     // convert encoder distance to radians
-    float radians = ((float)enc_dist) / m_num_slits * PI; 
+    float disk_percentage = ((float)enc_dist) / m_num_slits;
+    float radians = 2 * PI * disk_percentage; 
     // radians to distance
-    return radians * m_wheel_radius;
+    float distance = radians * m_wheel_radius;
+
+    return distance;
 }
 
 void Localisation::sample(){
@@ -62,6 +69,10 @@ void Localisation::update(){
     float left_dist = encDistToRealDist(m_l_enc_dist);
     float right_dist = encDistToRealDist(m_r_enc_dist);
 
+    // reset encoder delta
+    m_l_enc_dist = 0;
+    m_r_enc_dist = 0;
+
     // Serial.print("update called: ");
     // Serial.print(left_dist);
     // Serial.print('\t');
@@ -69,7 +80,7 @@ void Localisation::update(){
     // Serial.print('\n');
 
     float displacement = (left_dist + right_dist)/2.0;
-    float delta_angle = (right_dist - left_dist)/(m_wheel_distance);
+    float delta_angle = (right_dist - left_dist)/(2.0*m_wheel_distance);
 
     // Serial.print(displacement);
     // Serial.print('\t');
@@ -83,9 +94,6 @@ void Localisation::update(){
 
     x += delta_x;
     y += delta_y;
-
-    m_l_enc_dist = 0;
-    m_r_enc_dist = 0;
 }
 
 void Localisation::tick(){

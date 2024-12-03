@@ -3,19 +3,13 @@
 #include <Arduino.h>
 #include <WiFiEsp.h>
 
-#ifndef HAVE_HWSERIAL1
-#include "SoftwareSerial.h"
-// I know, really ugly
-SoftwareSerial Serial1(4, 5); // RX, TX
-#endif
-
 class RemoteDebugger{
 private:
     WiFiEspServer m_server;
     WiFiEspClient m_client;
 
-    char m_ssid[];
-    char m_pass[];
+    const char* m_ssid;
+    const char* m_pass;
     int m_port;
 
     int m_status = WL_IDLE_STATUS;
@@ -24,7 +18,7 @@ private:
     bool checkClient();
     void sendPacket();
 public:
-    RemoteDebugger(char ssid[], char pass[], int port) : 
+    RemoteDebugger(const char* ssid, const char* pass, int port) : 
                     m_ssid(ssid), m_pass(pass), m_port(port), m_server(port) {};
 
     int start();
@@ -40,4 +34,5 @@ public:
     void removeObject(int id);
 
     void updatePart(int part_id, float measurement);
-}
+    void proposePartName(int part_id, const char* name);
+};

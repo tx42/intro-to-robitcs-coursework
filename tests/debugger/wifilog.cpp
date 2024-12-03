@@ -1,6 +1,6 @@
 #include "wifilog.h"
 
-#define MAX_PACKET_SIZE 1024
+#define MAX_PACKET_SIZE 64
 
 // defining streams
 #define TEXT_STREAM_ID 0
@@ -17,6 +17,12 @@
 
 #define CMD_PAR_UPDATE 0
 #define CMD_PAR_PROPOSE 1
+
+#ifndef HAVE_HWSERIAL1
+#include "SoftwareSerial.h"
+// I know, really ugly
+SoftwareSerial Serial1(4, 5); // RX, TX
+#endif
 
 int RemoteDebugger::start(){
     Serial.begin(9600);     // initialise serial for debugging
@@ -57,7 +63,7 @@ size_t packetSize;
 // adds new field to the packet
 #define addPacketField(x) addVariablePacketField(&x, sizeof(x))
 
-void addVariablePacketField(void* data_ptr, size_t len){
+void addVariablePacketField(const void* data_ptr, size_t len){
     if(packetSize + len > MAX_PACKET_SIZE){
         return;
     }

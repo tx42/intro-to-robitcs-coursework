@@ -50,6 +50,7 @@ float Localisation::encDistToRealDist(int enc_dist){
     float radians = 2 * PI * disk_percentage; 
     // radians to distance
     float distance = radians * m_wheel_radius;
+
     return distance;
 }
 
@@ -79,7 +80,7 @@ void Localisation::update(){
     // Serial.print('\n');
 
     float displacement = (left_dist + right_dist)/2.0;
-    float delta_angle = (right_dist - left_dist)/(m_wheel_distance);
+    float delta_angle = (right_dist - left_dist)/(2.0*m_wheel_distance);
 
     // Serial.print(displacement);
     // Serial.print('\t');
