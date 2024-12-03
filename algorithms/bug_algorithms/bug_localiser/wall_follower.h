@@ -8,7 +8,7 @@
 
 // time (in ms) it takes for servo motor to set in desired position
 // from any other position
-#define SERVO_SETUP_DELAY 1000
+#define SERVO_SETUP_DELAY 400
 
 enum FollowDirection{
     CW,
@@ -17,8 +17,6 @@ enum FollowDirection{
 
 enum FollowStatus{
     STOPPED,
-    SETTING_UP,
-    READY,
     FOLLOWING,
     LOST
 };
@@ -32,11 +30,6 @@ private:
     FollowDirection m_follow_dir = CW;
     FollowStatus m_status = STOPPED;
 
-    unsigned long m_setup_finish_time;
-
-    // Calculates and updates motor velocities
-    void followTick();
-    void checkSetupTimer();
     float getFollowDirectionCoefficient();
 public:
     int sensor_degree = 45; // degrees shift from center
@@ -52,24 +45,15 @@ public:
     // Will ignore if follower is not in STOPPED state
     void setFollowDirection(FollowDirection direction);
 
-    // Asyncronisly sets up everything needed
-    // for wall following to function.
-    // Updates status to READY when finished.
-    void setupFollowing();
+    void start();
 
-    // Starts wall following
-    void startFollowing();
-
-    // Blocking function that's both sets up and starts wall following
-    void blockingSetupAndStart();
-
-    // Preforms vital update functions.
-    // This method should be called on 
+    // Recalculates and updates motor velocities
+    // should be called on
     // regular basis while status isn't STOPPED 
     void tick();
 
     // Stops following.
-    void stopFollowing();
+    void stop();
 
     FollowStatus getStatus();
 };

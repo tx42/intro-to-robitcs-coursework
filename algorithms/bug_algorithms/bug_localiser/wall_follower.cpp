@@ -20,36 +20,20 @@ float WallFollower::getFollowDirectionCoefficient(){
     }
 }
 
-void WallFollower::setupFollowing(){
-    if(m_status != STOPPED) return; // shouldn't normally happen
+void WallFollower::start(){
+    // can only start from STOPPED state
+    if(m_status != STOPPED) return;
 
+    // stop all movement
+    m_motorboard->stop();
+    // setting up servomotor
     m_servo->write(-sensor_degree * getFollowDirectionCoefficient() + 90);
-    m_status = SETTING_UP;
-    m_setup_finish_time = millis() + SERVO_SETUP_DELAY;
-}
-
-void WallFollower::startFollowing(){
-    if(m_status != READY) return;
-
+    delay(SERVO_SETUP_DELAY);
     m_status = FOLLOWING;
 }
 
-void WallFollower::blockingSetupAndStart(){
-    setupFollowing();
-    while(getStatus() == SETTING_UP){
-        checkSetupTimer();
-    }
-
-    startFollowing();
-}
-
-void WallFollower::checkSetupTimer(){
-    if(m_setup_finish_time < millis()){
-        m_status = READY;
-    }
-}
-
-void WallFollower::followTick(){
+void WallFollower::tick(){
+    if(m_status != FOLLOWING) return;
     // get distance measurement
     float dist = m_ultrasonic->measure();
     // calculate turn
@@ -59,19 +43,7 @@ void WallFollower::followTick(){
     m_motorboard->setVelocityTurn(follow_vel, turn);
 }
 
-void WallFollower::tick(){
-    switch(m_status){
-        case SETTING_UP:
-            checkSetupTimer();
-            break;
-        case FOLLOWING:
-        case LOST:
-            followTick();
-            break;
-    }
-}
-
-void WallFollower::stopFollowing(){
+void WallFollower::stop(){
     m_motorboard->stop();
 
     m_status = STOPPED;

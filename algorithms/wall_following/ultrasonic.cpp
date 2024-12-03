@@ -27,8 +27,6 @@ float tofToDistance(long tof){
 }
 
 float Ultrasonic::measure(){
-    Serial.print("Sending pulse on ");
-    Serial.println(m_TRIGGER_PIN);
    pingSensor(m_TRIGGER_PIN);
    long duration = pulseIn(m_ECHO_PIN, HIGH, MAX_DISTANCE * 30);
    if(duration == 0){
