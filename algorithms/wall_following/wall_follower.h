@@ -30,7 +30,7 @@ private:
     FollowDirection m_follow_dir = CW;
     FollowStatus m_status = STOPPED;
 
-    float getFollowDirectionCoefficient();
+    short m_dir_coef;
 public:
     int sensor_degree = 45; // degrees shift from center
     float turn_coefficient = 0.5;

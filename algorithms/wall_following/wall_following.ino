@@ -36,12 +36,16 @@ void setup(){
     // startup delay
     delay(5000);
 
+    // follower detailed configurations
+    follower.turn_coefficient = 0.5;
+    follower.target_distance = 20.0;
+    follower.follow_vel = 100.0;
+    follower.sensor_degree = 45;
+
     follower.start();
 }
 
 void loop(){
-    Serial.print("measure: ");
-    Serial.println(ultrasonic.measure());
-  
-//    follower.tick();
+   follower.tick();
+   delay(100);
 }
