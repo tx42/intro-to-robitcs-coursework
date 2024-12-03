@@ -13,8 +13,8 @@
 class Ultrasonic{
 private:
    // pin defenitions
-   int m_TRIGGER_PIN;
-   int m_ECHO_PIN;
+   int TRIGGER_PIN;
+   int ECHO_PIN;
 
 public:
    Ultrasonic(){};

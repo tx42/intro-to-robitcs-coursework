@@ -2,8 +2,8 @@
    Program to record and log data from ultrasonic sensor 
 */
 
-const int  pingPin = 10; // Trigger signal
-const int echoPin = 2; // Echo signal
+const int  pingPin = 9; // Trigger signal
+const int echoPin = 8; // Echo signal
 const int maxNumMeasures = 30;
 
 long cur_real_distance;
