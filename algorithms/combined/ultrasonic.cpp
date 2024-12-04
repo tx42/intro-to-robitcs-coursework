@@ -23,12 +23,12 @@ void pingSensor(int trigger_pin){
 // tof - time of flight in microseconds
 // returns - distance in centimeters
 float tofToDistance(long tof){
-   return SPEED_OF_SOUND*(float)tof/100.0/2.0;
+   return SPEED_OF_SOUND*(float)tof/10000.0/2.0;
 }
 
 float Ultrasonic::measure(){
    pingSensor(TRIGGER_PIN);
-   long duration = pulseIn(ECHO_PIN, HIGH, MAX_DISTANCE * 30);
+   long duration = pulseIn(ECHO_PIN, HIGH);
 
    if(duration == 0){
       return MAX_DISTANCE;
