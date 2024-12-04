@@ -41,8 +41,12 @@ public:
 
    // high-level motorboard control
    void forward(int power);
+   // rotates in the CW direction in place
    void right(int power);
+   // same as right() but doesn't reverse right motors
+   void lightRight(int power);
    void left(int power);
+   void lightLeft(int power);
    void back(int power);
    void cruise();
    void stop();

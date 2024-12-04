@@ -79,9 +79,19 @@ void Motorboard::right(int power){
    setLeftMotor(power, MOTOR_FORWARD);
 }
 
+void Motorboard::lightRight(int power){
+   setRightMotor(0, MOTOR_FORWARD);
+   setLeftMotor(power, MOTOR_FORWARD);
+}
+
 void Motorboard::left(int power){
    setRightMotor(power, MOTOR_FORWARD);
    setLeftMotor(power, MOTOR_REVERSE);
+}
+
+void Motorboard::lightLeft(int power){
+   setRightMotor(power, MOTOR_FORWARD);
+   setLeftMotor(0, MOTOR_FORWARD);   
 }
 
 void Motorboard::back(int power){
