@@ -2,8 +2,8 @@
 
 Ultrasonic sensor;
 
-const int  pingPin = 9; // Trigger signal
-const int echoPin = 8; // Echo signal
+const int  pingPin = 10; // Trigger signal
+const int echoPin = 2; // Echo signal
 
 void pingSensor(){
   digitalWrite(pingPin, LOW);
