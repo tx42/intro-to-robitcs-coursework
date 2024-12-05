@@ -89,3 +89,13 @@ public:
 
     FollowStatus getStatus();
 };
+
+// Returns safe estimate of time (in ms)
+// it takes servo to rotate by specified angle
+inline int servoRotationDuration(int angle){
+    if(angle == 0){
+        return 0;
+    }
+
+    return (SERVO_ANGULAR_INVERSE_SPEED * abs(angle)) / 1000 + 10;
+}

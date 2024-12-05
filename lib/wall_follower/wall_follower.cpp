@@ -1,16 +1,6 @@
 #include "wall_follower.h"
 
-// Returns safe estimate of time (in ms)
-// it takes servo to rotate by specified angle
-int inline servoRotationDuration(int angle){
-    if(angle == 0){
-        return 0;
-    }
-
-    return (SERVO_ANGULAR_INVERSE_SPEED * abs(angle)) / 1000 + 10;
-}
-
-float inline WallFollower::convertOrientCentral2Servo(int angle){
+inline float WallFollower::convertOrientCentral2Servo(int angle){
     return -angle * m_traverse_direction_coef + 90;
 }
 
@@ -54,11 +44,7 @@ float WallFollower::measureAtAngle(int angle){
 
     // by this time, servo should be in position
     // take measures
-    float sum_measures = 0;
-    for(int i = 0; i < NUMBER_SAMPLES; i++){
-        sum_measures += m_ultrasonic->measure();
-    }
-    return sum_measures / ((float)NUMBER_SAMPLES);
+    return m_ultrasonic->measureSamples(NUMBER_SAMPLES);
 }
 
 void WallFollower::updateMeasurements(){

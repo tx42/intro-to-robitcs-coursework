@@ -22,5 +22,6 @@ public:
 
    // returns distance in cm
    float measure();
+   float measureSamples(int number);
 };
 

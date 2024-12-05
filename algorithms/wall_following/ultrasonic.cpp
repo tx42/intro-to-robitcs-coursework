@@ -36,3 +36,11 @@ float Ultrasonic::measure(){
 
    return tofToDistance(duration);
 }
+
+float Ultrasonic::measureSamples(int number){
+   float sum = 0;
+   for(int i = 0; i < number; i++){
+      sum += measure();
+   }
+   return sum / ((float) number);
+}
