@@ -37,10 +37,20 @@ void setup(){
     delay(5000);
 
     // follower detailed configurations
+    // basic
+    follower.follow_sensor_degree = 40;
     follower.turn_coefficient = 0.01;
     follower.target_distance = 20.0;
     follower.follow_vel = 5.0;
-    follower.sensor_degree = 40;
+
+    // deceleration
+    follower.deceleration_start_dist = 30.0;
+    follower.deceleration_end_dist = 10;
+    follower.min_follow_vel = 1.0;
+
+    // narrowing
+    follower.min_target_dist = 10.0;
+    follower.narrow_update_delay = 500;
 
     follower.start();
 }
