@@ -4,13 +4,13 @@
 #define MAX_DISTANCE 100
 
 void Ultrasonic::init(int trigger_pin, int echo_pin){
-   pinMode(echo_pin, INPUT); 
+   ECHO_PIN = echo_pin;
+   pinMode(ECHO_PIN, INPUT); 
 }
 
 float Ultrasonic::measure(){
    delay(20);
-   int value = analogRead(echo_pin);
+   int value = analogRead(ECHO_PIN);
    int dist = (float)value/1024.0 * MAX_DISTANCE;
-   Serial.println(dist);
    return dist;
 }

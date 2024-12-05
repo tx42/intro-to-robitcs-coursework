@@ -50,12 +50,11 @@ void setup(){
 
     // narrowing
     follower.min_target_dist = 10.0;
-    follower.narrow_update_delay = 500;
+    follower.narrow_update_delay = 1000;
 
     follower.start();
 }
 
 void loop(){
    follower.tick();
-   delay(100);
 }

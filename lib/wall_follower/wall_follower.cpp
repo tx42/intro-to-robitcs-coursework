@@ -75,6 +75,7 @@ void WallFollower::updateMeasurements(){
     // check whether we should update narrow sensor
     if(millis() > m_last_narrow_update + narrow_update_delay){
         m_narrow_measure = measureAtAngle(-narrow_sensor_degree);
+        m_last_narrow_update = millis();
     }
 
     // make sensor go to home position (asynchronously)
