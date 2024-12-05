@@ -79,9 +79,19 @@ void Motorboard::right(int power){
    setLeftMotor(power, MOTOR_FORWARD);
 }
 
+void Motorboard::lightRight(int power){
+   setRightMotor(0, MOTOR_FORWARD);
+   setLeftMotor(power, MOTOR_FORWARD);
+}
+
 void Motorboard::left(int power){
    setRightMotor(power, MOTOR_FORWARD);
    setLeftMotor(power, MOTOR_REVERSE);
+}
+
+void Motorboard::lightLeft(int power){
+   setRightMotor(power, MOTOR_FORWARD);
+   setLeftMotor(0, MOTOR_FORWARD);   
 }
 
 void Motorboard::back(int power){
@@ -104,16 +114,34 @@ void Motorboard::setVelocityTurn(float vel, float turn){
    float v_l = vel - turn;
 
    // normalise if overflow
-   float v_top = max(v_r, v_l);
+   float v_top = max(abs(v_r), abs(v_l));
+   float norm_factor = 100.0 / v_top;
    if(v_top > 100.0){
-      float norm_factor = 100.0 / v_top;
       v_r = v_r * norm_factor;
       v_l = v_l * norm_factor;
    }
    
    // convert to 0 - 255
-   int power_r = round(v_r * 255);
-   int power_l = round(v_l * 255);
+   int power_r = round(v_r * 255 / 100);
+   int power_l = round(v_l * 255 / 100);
+
+   Serial.print("vel: ");
+   Serial.print(vel);
+   Serial.print("\tturn: ");
+   Serial.print(turn);
+   Serial.print("\t\traw_l: ");
+   Serial.print(v_l);
+   Serial.print("\traw_r: ");
+   Serial.print(v_r);
+   Serial.print("\tv_top: ");
+   Serial.print(v_top);
+   Serial.print("\tnorm: ");
+   Serial.print(norm_factor);
+   Serial.print("\t\tpwr_l: ");
+   Serial.print(power_l);
+   Serial.print("\tpwr_r: ");
+   Serial.print(power_r);
+   Serial.println();
 
    setSignedRightMotor(power_r);
    setSignedLeftMotor(power_l);

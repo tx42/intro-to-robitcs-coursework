@@ -114,7 +114,7 @@ void Motorboard::setVelocityTurn(float vel, float turn){
    float v_l = vel - turn;
 
    // normalise if overflow
-   float v_top = max(v_r, v_l);
+   float v_top = max(abs(v_r), abs(v_l));
    if(v_top > 100.0){
       float norm_factor = 100.0 / v_top;
       v_r = v_r * norm_factor;
@@ -122,8 +122,8 @@ void Motorboard::setVelocityTurn(float vel, float turn){
    }
    
    // convert to 0 - 255
-   int power_r = round(v_r * 255);
-   int power_l = round(v_l * 255);
+   int power_r = round(v_r * 255 / 100);
+   int power_l = round(v_l * 255 / 100);
 
    setSignedRightMotor(power_r);
    setSignedLeftMotor(power_l);

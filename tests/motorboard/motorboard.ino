@@ -12,19 +12,17 @@ void setup(){
         MOTOR_L_FWD_PIN,
         MOTOR_L_REV_PIN
    );
+
+   Serial.begin(9600);
+   Serial.println("started");
 }
 
 void loop(){
-    motorboard.setVelocityTurn(40.0, 0.0);
-    delay(2000);
-    motorboard.setVelocityTurn(40.0, 40.0);
-    delay(2000);
-    motorboard.setVelocityTurn(40.0, -40.0);
-    delay(2000);
-    motorboard.setVelocityTurn(-40.0, 0);
-    delay(2000);
-    motorboard.stop();
-    delay(10000);
+    if(Serial.available()){
+        float vel = Serial.parseInt() * 0.01;
+        float turn = Serial.parseInt() * 0.01;
+        while(Serial.available()) Serial.read();
 
-    while(1);
+        motorboard.setVelocityTurn(vel, turn);
+    }
 }
