@@ -14,8 +14,8 @@
 // #define SERVO_PIN 9
 
 /* SENSORS */
-// #define SONIC_TRIG_PIN 10
-// #define SONIC_ECHO_PIN 3
+#define SONIC_TRIG_PIN 10
+#define SONIC_ECHO_PIN 2
 
 #define ENCODER_R_PIN A4 // FILL IN
 #define ENCODER_L_PIN A3 // FILL IN
