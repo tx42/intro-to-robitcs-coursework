@@ -44,7 +44,8 @@ float WallFollower::measureAtAngle(int angle){
 
     // by this time, servo should be in position
     // take measures
-    return m_ultrasonic->measureSamples(NUMBER_SAMPLES);
+    float measure = m_ultrasonic->measureSamples(NUMBER_SAMPLES);
+    return measure; 
 }
 
 void WallFollower::updateMeasurements(){
@@ -56,7 +57,11 @@ void WallFollower::updateMeasurements(){
 
     // update follow sensor
     m_follow_measure = measureAtAngle(follow_sensor_degree);
-    m_forward_measure = measureAtAngle(0);
+
+    if(millis() > m_last_forward_update + forward_update_delay){
+        m_forward_measure = measureAtAngle(0);
+        m_last_forward_update = millis();
+    }
 
     // check whether we should update narrow sensor
     if(millis() > m_last_narrow_update + narrow_update_delay){
@@ -77,7 +82,7 @@ float WallFollower::calculateFollowDistance(){
         return target_distance;
     }
 
-    float follow_dist = 0.5*(m_follow_measure + m_narrow_measure);
+    float follow_dist = 0.5*(target_distance + m_narrow_measure);
     // check it it's smaller then minimum
     return min(follow_dist, min_target_dist);
 }
@@ -110,7 +115,7 @@ float WallFollower::calculateVelocity(){
 
 float WallFollower::calculateTurn(float follow_dist)
 {
-    float turn = target_distance - m_follow_measure;
+    float turn = follow_dist - m_follow_measure;
     turn *= turn_coefficient;
     turn *= m_traverse_direction_coef;
 

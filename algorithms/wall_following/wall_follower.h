@@ -36,6 +36,7 @@ private:
     float m_narrow_measure;
 
     long m_last_narrow_update;
+    long m_last_forward_update;
     long m_return_home_time;
 
     // Perform distance measure with ultrasonic at specific angle.
@@ -67,7 +68,8 @@ public:
     float deceleration_start_dist = 30.0;
 
     // defines how often narrow sensor is updated (in ms)
-    int narrow_update_delay = 500;
+    int narrow_update_delay = 3000;
+    int forward_update_delay = 1000;
 
     WallFollower(){};
     void init(Motorboard* motorboard, Ultrasonic* ultrasonic, Servo* dir_servo);
@@ -97,5 +99,5 @@ inline int servoRotationDuration(int angle){
         return 0;
     }
 
-    return (SERVO_ANGULAR_INVERSE_SPEED * abs(angle)) / 1000 + 10;
+    return (SERVO_ANGULAR_INVERSE_SPEED * abs(angle)) / 1000 + 30;
 }
