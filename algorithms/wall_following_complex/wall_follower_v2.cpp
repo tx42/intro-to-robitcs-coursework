@@ -1,4 +1,4 @@
-#include "wall_follower.h"
+#include "wall_follower_v2.h"
 
 inline float WallFollower::convertOrientCentral2Servo(int angle){
     return -angle * m_traverse_direction_coef + 90;

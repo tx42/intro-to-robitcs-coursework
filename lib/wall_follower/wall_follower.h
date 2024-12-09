@@ -6,9 +6,9 @@
 #include "motorboard.h"
 #include "ultrasonic.h"
 
-// how much time(us) will servo take to rotate by one degree (VERY APPROXIMATE)
-#define SERVO_ANGULAR_INVERSE_SPEED 100000/60
-#define NUMBER_SAMPLES 3
+// time (in ms) it takes for servo motor to set in desired position
+// from any other position
+#define SERVO_SETUP_DELAY 400
 
 enum FollowDirection{
     CW,
@@ -27,49 +27,15 @@ private:
     Ultrasonic* m_ultrasonic;
     Servo* m_servo;
 
+    FollowDirection m_follow_dir = CW;
     FollowStatus m_status = STOPPED;
 
-    short m_traverse_direction_coef;
-
-    float m_follow_measure;
-    float m_forward_measure;
-    float m_narrow_measure;
-
-    long m_last_narrow_update;
-    long m_last_forward_update;
-    long m_return_home_time;
-
-    // Perform distance measure with ultrasonic at specific angle.
-    // Angle is measured from center, with positive
-    // angles being towards the wall.
-    float measureAtAngle(int angle);
-    void updateMeasurements();
-
-    // Performs narrow check and returns new follow distance
-    float calculateFollowDistance();
-    // Performs obsticle check. Returns smaller speed if obstacle is close
-    float calculateVelocity();
-    // Calculates turn based on follow sensor's information (positive is CCW)
-    float calculateTurn(float follow_dist);
-
-    float inline convertOrientCentral2Servo(int angle);
+    short m_dir_coef;
 public:
-    int follow_sensor_degree = 45; // degrees shift from center
-    int narrow_sensor_degree = 80;
+    int sensor_degree = 45; // degrees shift from center
     float turn_coefficient = 0.5;
-    
+    float target_distance = 20.0; // in cm
     float follow_vel = 100.0;
-    float min_follow_vel = 10.0;
-
-    // distances are in cm
-    float target_distance = 30.0;
-    float min_target_dist = 20.0;
-    float deceleration_end_dist = 10.0;
-    float deceleration_start_dist = 30.0;
-
-    // defines how often narrow sensor is updated (in ms)
-    int narrow_update_delay = 3000;
-    int forward_update_delay = 1000;
 
     WallFollower(){};
     void init(Motorboard* motorboard, Ultrasonic* ultrasonic, Servo* dir_servo);
@@ -91,13 +57,3 @@ public:
 
     FollowStatus getStatus();
 };
-
-// Returns safe estimate of time (in ms)
-// it takes servo to rotate by specified angle
-inline int servoRotationDuration(int angle){
-    if(angle == 0){
-        return 0;
-    }
-
-    return (SERVO_ANGULAR_INVERSE_SPEED * abs(angle)) / 1000 + 30;
-}
